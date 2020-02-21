@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Grid, Button } from 'semantic-ui-react'
+import cuid from 'cuid'
 
 import EventList from '../eventList/EventList'
 import EventForm from '../EventForm/EventForm'
@@ -63,11 +64,23 @@ class EventDashboard extends Component {
     }
 
     //prevState will basically act as an toggle reseting
-    
-    handleIsOpenToggle =() => {
+
+    handleIsOpenToggle = () => {
         this.setState((prevState) => ({
-            isOpen:!prevState.isOpen
+            isOpen: !prevState.isOpen
         }))
+    }
+
+    handleCreateEvent = (newEvent) => {
+        newEvent.id = cuid();
+        newEvent.hostPhotoURL = '/assets/user.png';
+
+        //destructured way events from prevState
+        this.setState(({ events }) => ({
+            events: [...events, newEvent],
+            isOpen:false
+        }))
+
     }
 
     render() {
@@ -75,11 +88,11 @@ class EventDashboard extends Component {
         return (
             <Grid>
                 <Grid.Column width={10}>
-                    <EventList events={this.state.events} />
+                    <EventList events={events} />
                 </Grid.Column>
                 <Grid.Column width={6}>
-                    <Button onClick={this.handleIsOpenToggle}  positive content='Create Event' />
-                    {isOpen && <EventForm cancelFormOpen={this.handleIsOpenToggle} />}
+                    <Button onClick={this.handleIsOpenToggle} positive content='Create Event' />
+                    {isOpen && <EventForm createEvent={this.handleCreateEvent} cancelFormOpen={this.handleIsOpenToggle} />}
                 </Grid.Column>
             </Grid>
         )

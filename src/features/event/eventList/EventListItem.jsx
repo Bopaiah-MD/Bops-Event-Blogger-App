@@ -15,7 +15,7 @@ class EventListItem extends Component {
                   <Item.Content>
         <Item.Header as="a">{event.title}</Item.Header>
                     <Item.Description>
-        Hosted by <a>{event.description}</a>
+        Hosted by <a>{event.hostedBy}</a>
                     </Item.Description>
                   </Item.Content>
                 </Item>
@@ -23,13 +23,13 @@ class EventListItem extends Component {
             </Segment>
             <Segment>
               <span>
-        <Icon name="clock" /> {event.date}} |
-                <Icon name="marker" /> time
+        <Icon name="clock" /> {event.date} |
+                <Icon name="marker" /> {event.venue}
               </span>
             </Segment>
             <Segment secondary>
               <List horizontal>
-                {event.attendees.map((attendee) => (
+                {event.attendees && event.attendees.map((attendee) => (
                   <EventListAttendee key={attendee.id} attendee={attendee}/>
                 ))}
             
@@ -37,7 +37,7 @@ class EventListItem extends Component {
               </List>
             </Segment>
             <Segment clearing>
-            <span>Descrption will go here</span>
+                <span>{event.description}</span>
               <Button as="a" color="teal" floated="right" content="View" />
             </Segment>
           </Segment.Group>
