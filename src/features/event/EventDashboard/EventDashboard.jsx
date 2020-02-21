@@ -60,15 +60,42 @@ class EventDashboard extends Component {
 
     state = {
         events: eventsFromDashboard,
-        isOpen: false
+        isOpen: false,
+        selectedEvent: null
     }
 
     //prevState will basically act as an toggle reseting
 
-    handleIsOpenToggle = () => {
-        this.setState((prevState) => ({
-            isOpen: !prevState.isOpen
-        }))
+    // handleIsOpenToggle = () => {
+    //     this.setState((prevState) => ({
+    //         isOpen: !prevState.isOpen
+    //     }))
+    // }
+
+    handleCreateFormOpen = () => {
+        this.setState({
+            selectedEvent: null,
+            isOpen: true
+        })
+
+    }
+
+    handleFormCancel = () => {
+        this.setState({
+            isOpen: false
+        })
+
+    }
+
+    handleSelecetEvent = (evt,event) => {
+        console.log("evt",evt); // if in case we need onClick evt then only
+        console.log("event",event);
+
+        this.setState({
+            selectedEvent: event,
+            isOpen: true
+        })
+
     }
 
     handleCreateEvent = (newEvent) => {
@@ -78,21 +105,26 @@ class EventDashboard extends Component {
         //destructured way events from prevState
         this.setState(({ events }) => ({
             events: [...events, newEvent],
-            isOpen:false
+            isOpen: false
         }))
 
     }
 
     render() {
-        const { events, isOpen } = this.state
+        const { events, isOpen, selectedEvent } = this.state
         return (
             <Grid>
                 <Grid.Column width={10}>
-                    <EventList events={events} />
+                    <EventList events={events} selectEvent={this.handleSelecetEvent} />
                 </Grid.Column>
                 <Grid.Column width={6}>
-                    <Button onClick={this.handleIsOpenToggle} positive content='Create Event' />
-                    {isOpen && <EventForm createEvent={this.handleCreateEvent} cancelFormOpen={this.handleIsOpenToggle} />}
+                    <Button onClick={this.handleCreateFormOpen} positive content='Create Event' />
+                    {isOpen && 
+                    <EventForm 
+                    selectedEvent={selectedEvent}
+                    createEvent={this.handleCreateEvent} 
+                    cancelFormOpen={this.handleFormCancel} 
+                    />}
                 </Grid.Column>
             </Grid>
         )
