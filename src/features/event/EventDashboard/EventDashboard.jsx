@@ -114,6 +114,14 @@ class EventDashboard extends Component {
         }))
     }
 
+    handleDeleteEvent = (id) => {
+    this.setState(({ events }) => ({
+            events: events.filter((e) => e.id !== id)
+            }))
+
+    }
+
+
     handleCreateEvent = (newEvent) => {
         newEvent.id = cuid();
         newEvent.hostPhotoURL = '/assets/user.png';
@@ -131,7 +139,10 @@ class EventDashboard extends Component {
         return (
             <Grid>
                 <Grid.Column width={10}>
-                    <EventList events={events} selectEvent={this.handleSelecetEvent} />
+                    <EventList events={events} 
+                    selectEvent={this.handleSelecetEvent}
+                    deleteEvent={this.handleDeleteEvent}
+                     />
                 </Grid.Column>
                 <Grid.Column width={6}>
                     <Button onClick={this.handleCreateFormOpen} positive content='Create Event' />
