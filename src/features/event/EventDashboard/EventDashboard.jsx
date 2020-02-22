@@ -98,6 +98,22 @@ class EventDashboard extends Component {
 
     }
 
+    hanldeUpdateEvent =(updatedEvent) => {
+        this.setState(({events})=> ({
+            events: events.map((event)=> {
+                if(event.id === updatedEvent.id){
+                    return {...updatedEvent}
+                }
+                else {
+                    return event;
+                }
+            }),
+            isOpen:false,
+            selectedEvent:null
+
+        }))
+    }
+
     handleCreateEvent = (newEvent) => {
         newEvent.id = cuid();
         newEvent.hostPhotoURL = '/assets/user.png';
@@ -125,6 +141,7 @@ class EventDashboard extends Component {
                     selectedEvent={selectedEvent}
                     createEvent={this.handleCreateEvent} 
                     cancelFormOpen={this.handleFormCancel} 
+                    updateEvent={this.hanldeUpdateEvent}
                     />}
                 </Grid.Column>
             </Grid>

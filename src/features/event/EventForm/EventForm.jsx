@@ -13,6 +13,7 @@ class EventForm extends Component {
   };
 
   componentDidMount() {
+    console.log('EventForm componentDidMount');
     if(this.props.selectedEvent !== null){
       this.setState({
         ...this.props.selectedEvent         /* this wy of setting state will overide the state: {} above */
@@ -22,9 +23,14 @@ class EventForm extends Component {
 
   hanldeFormSubmit = (e) => {
     e.preventDefault();
-    this.props.createEvent(this.state);
-
-  }
+    //if the event is present & has an id then we allow to update. else create
+    if(this.state.id){
+      this.props.updateEvent(this.state);
+    }
+    else {
+      this.props.createEvent(this.state);
+    }
+    }
 
 
   onInputChange = ({ target: { name, value } }) => {
