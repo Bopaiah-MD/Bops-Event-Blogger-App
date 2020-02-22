@@ -9,7 +9,7 @@ const eventsFromDashboard = [
     {
         id: '1',
         title: 'Trip to Tower of London',
-        date: '2018-03-27T11:00:00+00:00',
+        date: '2018-03-27',
         category: 'culture',
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
@@ -33,7 +33,7 @@ const eventsFromDashboard = [
     {
         id: '2',
         title: 'Trip to Punch and Judy Pub',
-        date: '2018-03-28T14:00:00+00:00',
+        date: '2018-03-28',
         category: 'drinks',
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
@@ -87,8 +87,8 @@ class EventDashboard extends Component {
 
     }
 
-    handleSelecetEvent = (evt,event) => {
-        console.log("evt",evt); // if in case we need onClick evt then only
+    handleSelecetEvent = (event) => {
+        //console.log("evt",evt); // if in case we need onClick evt then only
         console.log("event",event);
 
         this.setState({

@@ -39,7 +39,7 @@ class EventListItem extends Component {
         <Segment clearing>
           <span>{event.description}</span>
           <Button
-            onClick={(evt) => selectEvent(evt, event)} //evt for passing button event above eg:: , here its not needed actually
+            onClick={() => selectEvent( event)} //evt for passing button event above eg:: , here its not needed actually
             as="a"
             color="teal"
             floated="right"

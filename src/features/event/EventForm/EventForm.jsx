@@ -5,15 +5,20 @@ import { Form, Segment, Button } from 'semantic-ui-react';
 class EventForm extends Component {
 
   state = {
-    
     title: '',
     date: '',
     city: '',
     venue: '',
     hostedBy: ''
-
-
   };
+
+  componentDidMount() {
+    if(this.props.selectedEvent !== null){
+      this.setState({
+        ...this.props.selectedEvent         /* this wy of setting state will overide the state: {} above */
+      })
+    }
+  }
 
   hanldeFormSubmit = (e) => {
     e.preventDefault();
@@ -64,5 +69,3 @@ class EventForm extends Component {
 }
 
 export default EventForm
-
-
