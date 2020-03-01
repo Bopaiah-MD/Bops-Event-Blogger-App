@@ -23,7 +23,7 @@ class EventForm extends Component {
 
   hanldeFormSubmit = (e) => {
     e.preventDefault();
-    //if the event is present & has an id then we allow to update. else create
+    //if the event is present & has an id then we allow to update. else create new event
     if(this.state.id){
       this.props.updateEvent(this.state);
     }

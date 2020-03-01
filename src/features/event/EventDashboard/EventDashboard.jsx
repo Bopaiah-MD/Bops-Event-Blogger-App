@@ -89,7 +89,7 @@ class EventDashboard extends Component {
 
     handleSelecetEvent = (event) => {
         //console.log("evt",evt); // if in case we need onClick evt then only
-        console.log("event",event);
+        console.log("event", event);
 
         this.setState({
             selectedEvent: event,
@@ -98,26 +98,27 @@ class EventDashboard extends Component {
 
     }
 
-    hanldeUpdateEvent =(updatedEvent) => {
-        this.setState(({events})=> ({
-            events: events.map((event)=> {
-                if(event.id === updatedEvent.id){
-                    return {...updatedEvent}
+    hanldeUpdateEvent = (updatedEvent) => {
+        this.setState(({ events }) => ({
+            events: events.map((event) => {
+                if (event.id === updatedEvent.id) {
+                    return { ...updatedEvent }
                 }
                 else {
                     return event;
                 }
             }),
-            isOpen:false,
-            selectedEvent:null
+            isOpen: false,
+            selectedEvent: null
 
         }))
     }
 
     handleDeleteEvent = (id) => {
-    this.setState(({ events }) => ({
+        console.log("handleDeleteEvent called from child",id);
+        this.setState(({ events }) => ({
             events: events.filter((e) => e.id !== id)
-            }))
+        }))
 
     }
 
@@ -139,21 +140,21 @@ class EventDashboard extends Component {
         return (
             <Grid>
                 <Grid.Column width={10}>
-                    <EventList events={events} 
-                    selectEvent={this.handleSelecetEvent}
-                    deleteEvent={this.handleDeleteEvent}
-                     />
+                    <EventList events={events}
+                        selectEvent={this.handleSelecetEvent}
+                        deleteEvent={this.handleDeleteEvent}
+                    />
                 </Grid.Column>
                 <Grid.Column width={6}>
                     <Button onClick={this.handleCreateFormOpen} positive content='Create Event' />
-                    {isOpen && 
-                    <EventForm 
-                    key={ selectedEvent ? selectedEvent.id: 0}
-                    selectedEvent={selectedEvent}
-                    createEvent={this.handleCreateEvent} 
-                    cancelFormOpen={this.handleFormCancel} 
-                    updateEvent={this.hanldeUpdateEvent}
-                    />}
+                    {isOpen &&
+                        <EventForm
+                            key={selectedEvent ? selectedEvent.id : 0}
+                            selectedEvent={selectedEvent}
+                            createEvent={this.handleCreateEvent}
+                            cancelFormOpen={this.handleFormCancel}
+                            updateEvent={this.hanldeUpdateEvent}
+                        />}
                 </Grid.Column>
             </Grid>
         )
